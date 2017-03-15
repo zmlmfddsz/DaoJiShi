@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="initialize.css"/>
+    <style>
+        body {
+            background: url("img/body.gif");
+        }
+
+        .centent {
+            background: url("img/black.jpg") no-repeat;
+            width: 610px;
+            margin: 40px auto 0;
+            height: 600px;
+            padding: 50px;
+            box-sizing: border-box;
+            text-align: center;
+            font-family: "萝莉体";
+        }
+
+        .centent h1 {
+            font-size: 55px;
+
+        }
+        input {
+            width: 75px;
+            border-radius: 20px;
+            margin: 20px 10px;
+            box-shadow: 2px 3px 4px 2px #999999 inset;
+            text-align: center;
+            color:olivedrab;
+            font-weight: bold;
+            height: 20px;
+        }
+
+        .img {
+            width: 130px;
+            height: 130px;
+            margin: 10px auto;
+            overflow: hidden;
+            border-radius: 50%;
+            position: relative;
+            -webkit-animation: glow 800ms ease-out infinite alternate;
+        }
+        @-webkit-keyframes glow {
+            0% {
+                border-color: #339;
+                box-shadow: 0 0 5px rgba(0,0,255,.2), inset 0 0 5px rgba(0,0,255,.1);
+            }
+            100% {
+                border-color: #66f;
+                box-shadow: 0 0 35px rgba(0,0,255,.6), inset 0 0 15px rgba(0,0,255,.6);
+            }
+        }
+
+        img {
+            border-radius: 50%;
+            position: absolute;
+            top: -9px;
+            left: -10px;
+        }
+
+        span {
+            color: yellowgreen;
+        }
+        .centent p:nth-child(2){
+            font-size: 16px;
+        }
+        .centent div+p{
+            font-size: 20px;
+            margin:25px 0;
+        }
+        .centent p:last-child {
+            font-size: 45px;
+        }
+    </style>
+</head>
+<body>
+<div class="centent">
+    <h1>开始倒计时</h1>
+
+    <p>请输入：<input type="text" id="year" value="2017"/>年 <input type="text" id="month" value="1"/>月 <input type="text" id="day" value="1"/>日</p>
+
+    <div class="img">
+        <img src="img/btn_hover.jpg" alt="按钮" id="btn"/>
+    </div>
+    <p>现在距离-&nbsp <span id="title"></span>&nbsp-还剩下：</p>
+
+    <p><span id="tian">&nbsp  </span>天 <span id="hour">&nbsp  </span>小时 <span id="minter">&nbsp  </span>分 <span id="ms">&nbsp  </span>秒
+    </p>
+</div>
+<script>
+    var year1=document.getElementById("year");
+    var month1=document.getElementById("month");
+    var day1=document.getElementById("day");
+    var title1=document.getElementById("title");
+    var tian1=document.getElementById("tian");
+    var hour1=document.getElementById("hour");
+    var minter1=document.getElementById("minter");
+    var ms1=document.getElementById("ms");
+    function zhuan(){
+        var year=year1.value;
+        var month=month1.value;
+        var day=day1.value;
+        title1.innerHTML=year+"年"+month+"月"+day+"日";
+        var fe_date=new Date(year,parseInt(month)-1,day);
+        var now_date=new Date();
+        var chazhi=fe_date-now_date;
+        var tian_ms=24*60*60*1000;
+        var hour_ms=60*60*1000;
+        var min_ms=60*1000;
+        var t=chazhi/tian_ms;
+        tian1.innerHTML=Math.floor(t);
+        var h=chazhi/hour_ms;
+        hour1.innerHTML=Math.floor(h)-Math.floor(t)*24;
+        var m=chazhi/min_ms;
+        minter1.innerHTML=Math.floor(m)-Math.floor(h)*60;
+        var ms=chazhi/1000;
+        ms1.innerHTML=Math.floor(ms)-Math.floor(m)*60;
+    }
+
+   document.getElementById("btn").onclick=function(){
+       setInterval(zhuan,1000);
+   }
+</script>
+</body>
+</html>
